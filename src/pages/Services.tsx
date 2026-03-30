@@ -229,7 +229,7 @@ const ServicesPage = () => {
               alt="Construction services"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-primary/80" />
+            <div className="absolute inset-0 bg-black/60" />
           </div>
           <div className="container relative z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
