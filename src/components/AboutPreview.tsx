@@ -40,14 +40,7 @@ const AboutPreview = () => {
               Your Trusted Construction Partner in Bangalore
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              BHUVi Lifespaces traces its roots to 2005, when Mr. Srinivasaiah began building homes
-              with a simple philosophy: "Quality over Quantity." He personally supervised every project,
-              ensuring each home was built with care, precision, and pride.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-8">
-              Today, under the leadership of Santosh Srinivasaiah, BHUVi Lifespaces combines modern
-              engineering with technology-driven monitoring — a brand that blends tradition with
-              innovation, transparency, and uncompromising quality.
+              Bhuvi Lifespaces is recognized as one of the best construction companies in Bangalore and among the top residential builders in the city. BHUVi Lifespaces traces its roots to 2005, when Mr. Srinivasaiah began building homes with a simple philosophy: "Quality over Quantity." He personally supervised every project, ensuring each home was built with care, precision, and pride. Over time, this dedication grew into a larger vision carried forward by his son, Santosh Srinivasaiah. Combining modern engineering, technology-driven monitoring, and professional systems, Santosh expanded the family's construction legacy. Today, BHUVi Lifespaces stands as a brand that blends tradition with innovation, transparency, and uncompromising quality.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

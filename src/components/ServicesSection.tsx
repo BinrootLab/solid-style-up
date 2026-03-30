@@ -6,13 +6,13 @@ const services = [
   {
     icon: Home,
     title: "Residential Construction",
-    description: "Custom homes and residential projects built with precision and pride.",
+    description: "Custom homes and residential projects built with precision and pride — from independent houses to premium homes.",
     features: ["Custom Home Design", "Turnkey Construction", "Quality Checks", "On-Time Delivery"],
   },
   {
     icon: Building2,
     title: "Commercial Construction",
-    description: "Office buildings, retail spaces, and commercial builds delivered with clear timelines.",
+    description: "Office buildings, retail spaces, and commercial builds delivered with clear timelines, budgets, and specifications.",
     features: ["Office Spaces", "Retail & Showrooms", "MEP Coordination", "Project Scheduling"],
   },
   {
@@ -30,13 +30,13 @@ const services = [
   {
     icon: ClipboardList,
     title: "Project Management",
-    description: "End-to-end planning, scheduling, coordination, and quality checks.",
+    description: "End-to-end planning, scheduling, coordination, and quality checks to keep your project on track and transparent.",
     features: ["Planning & Scheduling", "Vendor Coordination", "Quality Audits", "Site Supervision"],
   },
   {
     icon: Hammer,
     title: "Renovation & Remodelling",
-    description: "Upgrade and transform existing spaces with smart planning and finishing.",
+    description: "Upgrade and transform existing spaces with smart planning, structural safety, and finishing that lasts.",
     features: ["Interior Renovations", "Structural Changes", "Waterproofing & Repairs", "Modernisation"],
   },
 ];
@@ -57,9 +57,9 @@ const ServicesSection = () => {
             <div className="h-px w-8 bg-accent" />
           </div>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Comprehensive Construction Solutions
+            What We Build
           </h2>
-          <p className="text-muted-foreground">Tailored to your needs — from residential homes to commercial spaces</p>
+          <p className="text-muted-foreground">Comprehensive construction solutions tailored to your needs</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

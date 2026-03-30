@@ -230,7 +230,7 @@ const CostCalculatorPage = () => {
                 <p className="text-2xl mb-3">⏰</p>
                 <h3 className="text-lg font-display font-semibold mb-2">We Pay the Penalty</h3>
                 <p className="text-sm text-primary-foreground/60 leading-relaxed">
-                  If the project is delayed from our side, <strong>we pay the penalty — not you</strong>.
+                  If the project is delayed from our side, <strong>we pay the penalty — not you</strong>. This is our commitment, our culture, and our differentiator.
                 </p>
               </div>
             </div>
