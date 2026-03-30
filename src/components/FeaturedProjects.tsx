@@ -40,6 +40,7 @@ const FeaturedProjects = () => {
             </div>
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">Featured Projects</h2>
             <p className="text-muted-foreground mt-2">Discover our portfolio of exceptional construction projects that showcase our expertise and commitment to excellence</p>
+          </div>
           <Link
             to="/projects"
             className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent/80 transition-colors"
