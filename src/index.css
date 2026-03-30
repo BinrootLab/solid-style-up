@@ -7,42 +7,42 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 220 15% 13%;
+    --foreground: 214 30% 12%;
 
-    --card: 0 0% 99%;
-    --card-foreground: 220 15% 13%;
+    --card: 210 20% 98%;
+    --card-foreground: 214 30% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 13%;
+    --popover-foreground: 214 30% 12%;
 
-    --primary: 220 14% 16%;
+    --primary: 214 70% 30%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 220 10% 96%;
-    --secondary-foreground: 220 15% 13%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 214 30% 12%;
 
-    --muted: 220 10% 96%;
-    --muted-foreground: 220 8% 50%;
+    --muted: 210 15% 95%;
+    --muted-foreground: 214 15% 48%;
 
-    --accent: 38 65% 50%;
+    --accent: 214 70% 30%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 10% 91%;
-    --input: 220 10% 91%;
-    --ring: 38 65% 50%;
+    --border: 210 15% 90%;
+    --input: 210 15% 90%;
+    --ring: 214 70% 30%;
 
     --radius: 0.5rem;
 
-    --gold: 38 65% 50%;
-    --gold-foreground: 220 15% 13%;
-    --dark-section: 220 14% 10%;
-    --dark-section-foreground: 220 10% 92%;
+    --gold: 214 55% 42%;
+    --gold-foreground: 0 0% 100%;
+    --dark-section: 214 50% 14%;
+    --dark-section-foreground: 210 15% 92%;
 
-    --hero-overlay: linear-gradient(180deg, hsla(220, 14%, 10%, 0.7) 0%, hsla(220, 14%, 10%, 0.4) 100%);
-    --section-gradient: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(220, 10%, 97%) 100%);
+    --hero-overlay: linear-gradient(180deg, hsla(214, 50%, 12%, 0.8) 0%, hsla(214, 50%, 12%, 0.4) 100%);
+    --section-gradient: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(210, 20%, 97%) 100%);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;

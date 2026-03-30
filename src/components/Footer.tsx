@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -7,8 +8,8 @@ const Footer = () => {
       <div className="container py-16">
         <div className="grid md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
-            <Link to="/" className="text-2xl font-display font-bold tracking-tight">
-              BHUV<span className="text-accent">i</span>
+            <Link to="/" className="inline-block">
+              <img src={logo} alt="BHUVi Lifespaces" className="h-10 w-auto brightness-0 invert" />
             </Link>
             <p className="mt-4 text-sm text-primary-foreground/50 leading-relaxed">
               Building excellence since 2005. Your trusted construction partner in Bangalore.
@@ -16,7 +17,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold tracking-widest uppercase mb-6 text-accent">Quick Links</h4>
+            <h4 className="text-sm font-semibold tracking-widest uppercase mb-6 text-primary-foreground/80">Quick Links</h4>
             <ul className="space-y-3">
               {["Home", "Services", "Projects", "About", "Contact"].map((link) => (
                 <li key={link}>
@@ -32,7 +33,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold tracking-widest uppercase mb-6 text-accent">Services</h4>
+            <h4 className="text-sm font-semibold tracking-widest uppercase mb-6 text-primary-foreground/80">Services</h4>
             <ul className="space-y-3">
               {["Residential Construction", "Commercial Construction", "Apartments & Villas", "Rental Units", "Renovation"].map((s) => (
                 <li key={s}>
@@ -45,22 +46,22 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold tracking-widest uppercase mb-6 text-accent">Contact</h4>
+            <h4 className="text-sm font-semibold tracking-widest uppercase mb-6 text-primary-foreground/80">Contact</h4>
             <ul className="space-y-4">
               <li className="flex gap-3 text-sm text-primary-foreground/50">
-                <Mail size={16} className="flex-shrink-0 text-accent mt-0.5" />
+                <Mail size={16} className="flex-shrink-0 mt-0.5" />
                 <a href="mailto:bhuvilifespaces@gmail.com" className="hover:text-primary-foreground transition-colors">
                   bhuvilifespaces@gmail.com
                 </a>
               </li>
               <li className="flex gap-3 text-sm text-primary-foreground/50">
-                <Phone size={16} className="flex-shrink-0 text-accent mt-0.5" />
+                <Phone size={16} className="flex-shrink-0 mt-0.5" />
                 <a href="tel:+919741155118" className="hover:text-primary-foreground transition-colors">
                   +91 97411 55118
                 </a>
               </li>
               <li className="flex gap-3 text-sm text-primary-foreground/50">
-                <MapPin size={16} className="flex-shrink-0 text-accent mt-0.5" />
+                <MapPin size={16} className="flex-shrink-0 mt-0.5" />
                 <span>Bhuvi Life Spaces, 8th main, AECS Layout, A block, Singasandra, Bangalore - 560068</span>
               </li>
             </ul>
