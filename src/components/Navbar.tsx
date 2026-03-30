@@ -68,7 +68,7 @@ const Navbar = () => {
                 : "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
             }`}
           >
-            Get a Quote
+            Client Login
           </Link>
         </div>
 
@@ -110,7 +110,7 @@ const Navbar = () => {
                 className="mt-4 px-6 py-3 text-center text-sm font-semibold bg-primary text-primary-foreground rounded-md"
                 onClick={() => setOpen(false)}
               >
-                Get a Quote
+                Client Login
               </Link>
             </div>
           </motion.div>
