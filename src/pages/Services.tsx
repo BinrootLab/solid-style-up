@@ -154,14 +154,14 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Process */}
-      <section className="py-24 bg-secondary">
+      {/* Process - Visual Journey */}
+      <section className="py-24 bg-secondary overflow-hidden">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center max-w-2xl mx-auto mb-16"
+            className="text-center max-w-2xl mx-auto mb-20"
           >
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-px w-8 bg-accent" />
@@ -169,33 +169,82 @@ const ServicesPage = () => {
               <div className="h-px w-8 bg-accent" />
             </div>
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              Building Your Construction Foundation
+              Your Construction Journey
             </h2>
             <p className="text-muted-foreground">
-              A streamlined process that ensures quality, transparency, and timely delivery at every stage
+              From the first conversation to handing over the keys — here's how we bring your vision to life.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {processSteps.map((step, i) => (
-              <motion.div
-                key={step.step}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-background rounded-lg overflow-hidden border border-border"
-              >
-                <div className="aspect-[16/10] overflow-hidden">
-                  <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
+          {/* Timeline Journey */}
+          <div className="relative">
+            {/* Vertical connector line - desktop */}
+            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2" />
+
+            <div className="space-y-16 lg:space-y-0">
+              {processSteps.map((step, i) => {
+                const isEven = i % 2 === 0;
+                return (
+                  <motion.div
+                    key={step.step}
+                    initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="relative lg:py-8"
+                  >
+                    {/* Desktop layout - alternating sides */}
+                    <div className={`lg:grid lg:grid-cols-2 lg:gap-16 items-center ${isEven ? '' : 'lg:direction-rtl'}`}>
+                      {/* Content side */}
+                      <div className={`${isEven ? 'lg:text-right lg:pr-16' : 'lg:order-2 lg:pl-16'}`}>
+                        <div className={`flex items-center gap-4 mb-4 ${isEven ? 'lg:justify-end' : ''}`}>
+                          <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent text-accent-foreground text-sm font-bold">
+                            {step.step}
+                          </span>
+                          <h3 className="text-xl font-display font-semibold text-foreground">{step.title}</h3>
+                        </div>
+                        <p className="text-muted-foreground leading-relaxed max-w-md ml-16 lg:ml-0 lg:max-w-none">
+                          {step.description}
+                        </p>
+                      </div>
+
+                      {/* Image side */}
+                      <div className={`mt-6 lg:mt-0 ${isEven ? 'lg:order-2 lg:pl-16' : 'lg:pr-16'}`}>
+                        <div className="relative rounded-xl overflow-hidden shadow-lg aspect-[16/10] ml-16 lg:ml-0">
+                          <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Center dot on timeline - desktop */}
+                    <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                      <div className="w-5 h-5 rounded-full bg-accent border-4 border-secondary shadow-md" />
+                    </div>
+
+                    {/* Mobile vertical line connector */}
+                    {i < processSteps.length - 1 && (
+                      <div className="lg:hidden absolute left-[1.45rem] top-[3.5rem] bottom-[-4rem] w-px bg-border" />
+                    )}
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Journey end marker */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="hidden lg:flex justify-center mt-8"
+            >
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
+                  <CheckCircle size={20} className="text-accent-foreground" />
                 </div>
-                <div className="p-6">
-                  <span className="text-3xl font-display font-bold text-accent/20">{step.step}</span>
-                  <h3 className="text-lg font-display font-semibold text-foreground mt-2 mb-2">{step.title}</h3>
-                  <p className="text-sm text-muted-foreground">{step.description}</p>
-                </div>
-              </motion.div>
-            ))}
+                <span className="text-sm font-semibold text-accent">Your Dream Home</span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
