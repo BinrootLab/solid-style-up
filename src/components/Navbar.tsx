@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -13,37 +14,60 @@ const navLinks = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-secondary-foreground/10">
-      <div className="container flex items-center justify-between h-16 md:h-20">
-        <a href="/" className="text-2xl font-display font-bold tracking-tight text-secondary-foreground">
-          BHUV<span className="text-gold">i</span>
-        </a>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-background/95 backdrop-blur-md shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container flex items-center justify-between h-20">
+        <Link to="/" className="flex items-center gap-1">
+          <span className="text-2xl font-display font-bold tracking-tight">
+            <span className={scrolled ? "text-foreground" : "text-primary-foreground"}>BHUV</span>
+            <span className="text-accent">i</span>
+          </span>
+        </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.label}
-              href={link.href}
-              className="text-sm font-medium text-secondary-foreground/70 hover:text-gold transition-colors duration-300"
+              to={link.href}
+              className={`px-4 py-2 text-sm font-medium transition-colors rounded-md ${
+                location.pathname === link.href
+                  ? "text-accent"
+                  : scrolled
+                  ? "text-foreground/70 hover:text-foreground"
+                  : "text-primary-foreground/80 hover:text-primary-foreground"
+              }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="/contact"
-            className="px-5 py-2.5 text-sm font-semibold bg-primary text-primary-foreground rounded-sm hover:bg-accent transition-colors"
+          <Link
+            to="/contact"
+            className="ml-4 px-6 py-2.5 text-sm font-semibold bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors"
           >
-            Client Login
-          </a>
+            Get a Quote
+          </Link>
         </div>
 
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-secondary-foreground"
+          className={`lg:hidden ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -56,25 +80,30 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-secondary border-t border-secondary-foreground/10"
+            className="lg:hidden bg-background border-t border-border"
           >
-            <div className="container py-6 flex flex-col gap-4">
+            <div className="container py-6 flex flex-col gap-1">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
-                  className="text-secondary-foreground/80 hover:text-gold transition-colors py-2"
+                  to={link.href}
+                  className={`py-3 px-4 rounded-md text-sm font-medium transition-colors ${
+                    location.pathname === link.href
+                      ? "text-accent bg-secondary"
+                      : "text-foreground/70 hover:text-foreground hover:bg-secondary"
+                  }`}
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
-              <a
-                href="/contact"
-                className="mt-2 px-5 py-3 text-center font-semibold bg-primary text-primary-foreground rounded-sm"
+              <Link
+                to="/contact"
+                className="mt-4 px-6 py-3 text-center text-sm font-semibold bg-accent text-accent-foreground rounded-md"
+                onClick={() => setOpen(false)}
               >
-                Client Login
-              </a>
+                Get a Quote
+              </Link>
             </div>
           </motion.div>
         )}
