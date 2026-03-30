@@ -11,7 +11,7 @@ const HeroSection = () => {
           alt="Premium modern home interior"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-primary/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20" />
       </div>
 
       <div className="container relative z-10 pt-20">
