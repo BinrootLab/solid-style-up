@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Home, Building2, Building, Key, ClipboardList, Hammer, ArrowRight, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -84,133 +84,96 @@ const processSteps = [
   },
 ];
 
-const HorizontalScrollProcess = ({ steps }: { steps: typeof processSteps }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+const ProcessJourney = ({ steps }: { steps: typeof processSteps }) => {
   const [activeStep, setActiveStep] = useState(0);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${(steps.length - 1) * 100 / steps.length}%`]);
-  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  // Update active step based on scroll
-  scrollYProgress.on("change", (v) => {
-    const step = Math.min(Math.round(v * (steps.length - 1)), steps.length - 1);
-    setActiveStep(step);
-  });
+  const active = steps[activeStep];
 
   return (
-    <div ref={containerRef} className="relative" style={{ height: `${steps.length * 80}vh` }}>
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-        {/* Progress bar */}
-        <div className="container mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            {steps.map((step, i) => (
-              <div key={step.step} className="flex items-center gap-3 flex-1">
-                <div
-                  className={`flex items-center justify-center w-9 h-9 rounded-full text-xs font-bold transition-all duration-500 ${
-                    i <= activeStep
-                      ? "bg-accent text-accent-foreground scale-110"
-                      : "bg-primary-foreground/10 text-primary-foreground/30"
-                  }`}
-                >
-                  {step.step}
-                </div>
-                {i < steps.length - 1 && (
-                  <div className="flex-1 h-px bg-primary-foreground/10 relative hidden md:block">
-                    <motion.div
-                      className="absolute inset-y-0 left-0 bg-accent"
-                      style={{
-                        width: i < activeStep ? "100%" : "0%",
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Scrolling panels */}
-        <div ref={scrollRef} className="flex-1 overflow-hidden">
-          <motion.div className="flex h-full" style={{ x }}>
-            {steps.map((step, i) => (
-              <div
-                key={step.step}
-                className="min-w-full h-full px-4 md:px-0"
-                style={{ width: `${100 / steps.length}%` }}
-              >
-                <div className="container h-full">
-                  <div className="grid lg:grid-cols-2 gap-12 h-full items-center">
-                    {/* Image */}
-                    <motion.div
-                      className="relative rounded-2xl overflow-hidden aspect-[16/10] shadow-2xl"
-                      initial={{ opacity: 0.5, scale: 0.95 }}
-                      animate={i === activeStep ? { opacity: 1, scale: 1 } : { opacity: 0.5, scale: 0.95 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <img
-                        src={step.image}
-                        alt={step.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                      <div className="absolute bottom-6 left-6">
-                        <span className="text-7xl font-display font-bold text-white/10">{step.step}</span>
-                      </div>
-                    </motion.div>
-
-                    {/* Content */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={i === activeStep ? { opacity: 1, y: 0 } : { opacity: 0.3, y: 20 }}
-                      transition={{ duration: 0.5 }}
-                      className="lg:pl-8"
-                    >
-                      <span className="text-accent text-sm font-semibold tracking-widest uppercase mb-2 block">
-                        Step {step.step}
-                      </span>
-                      <h3 className="text-3xl md:text-4xl font-display font-bold mb-6">
-                        {step.title}
-                      </h3>
-                      <p className="text-primary-foreground/50 text-lg leading-relaxed mb-8 max-w-md">
-                        {step.description}
-                      </p>
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
-                          <CheckCircle size={20} className="text-accent" />
-                        </div>
-                        <span className="text-sm text-primary-foreground/40">
-                          {i < steps.length - 1
-                            ? `Next: ${steps[i + 1].title}`
-                            : "Your Dream Home Awaits"}
-                        </span>
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Scroll hint */}
-        <div className="container mt-6">
-          <div className="flex items-center gap-2 text-primary-foreground/30 text-xs">
-            <motion.div
-              animate={{ y: [0, 4, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
+    <div>
+      {/* Step selector bar */}
+      <div className="flex items-center justify-between mb-12 overflow-x-auto pb-4 gap-1">
+        {steps.map((step, i) => (
+          <div key={step.step} className="flex items-center flex-1 min-w-[80px]">
+            <button
+              onClick={() => setActiveStep(i)}
+              className="flex flex-col items-center gap-2 w-full"
             >
-              ↓
-            </motion.div>
-            <span>Scroll to explore</span>
+              <div
+                className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
+                  i === activeStep
+                    ? "bg-accent text-accent-foreground scale-110 shadow-lg"
+                    : i < activeStep
+                    ? "bg-accent/20 text-accent"
+                    : "bg-muted text-muted-foreground"
+                }`}
+              >
+                {i < activeStep ? <CheckCircle size={18} /> : step.step}
+              </div>
+              <span
+                className={`text-xs font-medium text-center transition-colors hidden md:block ${
+                  i === activeStep ? "text-foreground" : "text-muted-foreground"
+                }`}
+              >
+                {step.title}
+              </span>
+            </button>
+            {i < steps.length - 1 && (
+              <div className="flex-1 h-px mx-1 hidden md:block">
+                <div className={`h-full transition-colors duration-300 ${i < activeStep ? "bg-accent" : "bg-border"}`} />
+              </div>
+            )}
           </div>
-        </div>
+        ))}
       </div>
+
+      {/* Active step content */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeStep}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4 }}
+          className="grid lg:grid-cols-2 gap-12 items-center"
+        >
+          <div className="relative rounded-2xl overflow-hidden aspect-[16/10] shadow-2xl">
+            <img src={active.image} alt={active.title} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="absolute bottom-6 left-6">
+              <span className="text-8xl font-display font-bold text-white/10">{active.step}</span>
+            </div>
+          </div>
+
+          <div className="lg:pl-4">
+            <span className="text-accent text-sm font-semibold tracking-widest uppercase mb-3 block">
+              Step {active.step} of {steps.length}
+            </span>
+            <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
+              {active.title}
+            </h3>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8 max-w-md">
+              {active.description}
+            </p>
+            <div className="flex items-center gap-4">
+              {activeStep < steps.length - 1 ? (
+                <button
+                  onClick={() => setActiveStep(activeStep + 1)}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-semibold text-sm rounded-md hover:bg-accent/90 transition-colors"
+                >
+                  Next Step <ArrowRight size={16} />
+                </button>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                    <CheckCircle size={18} className="text-accent" />
+                  </div>
+                  <span className="text-sm font-semibold text-accent">Your Dream Home Awaits</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
@@ -229,7 +192,7 @@ const ServicesPage = () => {
               alt="Construction services"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-primary/80" />
+            <div className="absolute inset-0 bg-black/60" />
           </div>
           <div className="container relative z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
@@ -286,29 +249,30 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Process - Horizontal Scroll Journey */}
-      <section className="py-24 bg-foreground text-primary-foreground overflow-hidden">
-        <div className="container mb-16">
+      {/* Process - Interactive Journey */}
+      <section className="py-24 bg-secondary">
+        <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-2xl"
+            className="text-center max-w-2xl mx-auto mb-16"
           >
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-px w-8 bg-accent" />
               <span className="text-accent text-sm font-semibold tracking-widest uppercase">Our Process</span>
+              <div className="h-px w-8 bg-accent" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
               Your Construction Journey
             </h2>
-            <p className="text-primary-foreground/50">
+            <p className="text-muted-foreground">
               From the first conversation to handing over the keys — here's how we bring your vision to life.
             </p>
           </motion.div>
-        </div>
 
-        <HorizontalScrollProcess steps={processSteps} />
+          <ProcessJourney steps={processSteps} />
+        </div>
       </section>
 
       {/* Lifetime Support */}
