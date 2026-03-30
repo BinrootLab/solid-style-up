@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Home, Building2, Building, Key, ClipboardList, Hammer, ArrowRight, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -83,6 +84,137 @@ const processSteps = [
   },
 ];
 
+const HorizontalScrollProcess = ({ steps }: { steps: typeof processSteps }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeStep, setActiveStep] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${(steps.length - 1) * 100 / steps.length}%`]);
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  // Update active step based on scroll
+  scrollYProgress.on("change", (v) => {
+    const step = Math.min(Math.round(v * (steps.length - 1)), steps.length - 1);
+    setActiveStep(step);
+  });
+
+  return (
+    <div ref={containerRef} className="relative" style={{ height: `${steps.length * 80}vh` }}>
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+        {/* Progress bar */}
+        <div className="container mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            {steps.map((step, i) => (
+              <div key={step.step} className="flex items-center gap-3 flex-1">
+                <div
+                  className={`flex items-center justify-center w-9 h-9 rounded-full text-xs font-bold transition-all duration-500 ${
+                    i <= activeStep
+                      ? "bg-accent text-accent-foreground scale-110"
+                      : "bg-primary-foreground/10 text-primary-foreground/30"
+                  }`}
+                >
+                  {step.step}
+                </div>
+                {i < steps.length - 1 && (
+                  <div className="flex-1 h-px bg-primary-foreground/10 relative hidden md:block">
+                    <motion.div
+                      className="absolute inset-y-0 left-0 bg-accent"
+                      style={{
+                        width: i < activeStep ? "100%" : "0%",
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Scrolling panels */}
+        <div ref={scrollRef} className="flex-1 overflow-hidden">
+          <motion.div className="flex h-full" style={{ x }}>
+            {steps.map((step, i) => (
+              <div
+                key={step.step}
+                className="min-w-full h-full px-4 md:px-0"
+                style={{ width: `${100 / steps.length}%` }}
+              >
+                <div className="container h-full">
+                  <div className="grid lg:grid-cols-2 gap-12 h-full items-center">
+                    {/* Image */}
+                    <motion.div
+                      className="relative rounded-2xl overflow-hidden aspect-[16/10] shadow-2xl"
+                      initial={{ opacity: 0.5, scale: 0.95 }}
+                      animate={i === activeStep ? { opacity: 1, scale: 1 } : { opacity: 0.5, scale: 0.95 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <img
+                        src={step.image}
+                        alt={step.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      <div className="absolute bottom-6 left-6">
+                        <span className="text-7xl font-display font-bold text-white/10">{step.step}</span>
+                      </div>
+                    </motion.div>
+
+                    {/* Content */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={i === activeStep ? { opacity: 1, y: 0 } : { opacity: 0.3, y: 20 }}
+                      transition={{ duration: 0.5 }}
+                      className="lg:pl-8"
+                    >
+                      <span className="text-accent text-sm font-semibold tracking-widest uppercase mb-2 block">
+                        Step {step.step}
+                      </span>
+                      <h3 className="text-3xl md:text-4xl font-display font-bold mb-6">
+                        {step.title}
+                      </h3>
+                      <p className="text-primary-foreground/50 text-lg leading-relaxed mb-8 max-w-md">
+                        {step.description}
+                      </p>
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
+                          <CheckCircle size={20} className="text-accent" />
+                        </div>
+                        <span className="text-sm text-primary-foreground/40">
+                          {i < steps.length - 1
+                            ? `Next: ${steps[i + 1].title}`
+                            : "Your Dream Home Awaits"}
+                        </span>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Scroll hint */}
+        <div className="container mt-6">
+          <div className="flex items-center gap-2 text-primary-foreground/30 text-xs">
+            <motion.div
+              animate={{ y: [0, 4, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+            >
+              ↓
+            </motion.div>
+            <span>Scroll to explore</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ServicesPage = () => {
   return (
     <div className="min-h-screen">
@@ -154,99 +286,29 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Process - Visual Journey */}
-      <section className="py-24 bg-secondary overflow-hidden">
-        <div className="container">
+      {/* Process - Horizontal Scroll Journey */}
+      <section className="py-24 bg-foreground text-primary-foreground overflow-hidden">
+        <div className="container mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center max-w-2xl mx-auto mb-20"
+            className="max-w-2xl"
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-accent" />
               <span className="text-accent text-sm font-semibold tracking-widest uppercase">Our Process</span>
-              <div className="h-px w-8 bg-accent" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
               Your Construction Journey
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-primary-foreground/50">
               From the first conversation to handing over the keys — here's how we bring your vision to life.
             </p>
           </motion.div>
-
-          {/* Timeline Journey */}
-          <div className="relative">
-            {/* Vertical connector line - desktop */}
-            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2" />
-
-            <div className="space-y-16 lg:space-y-0">
-              {processSteps.map((step, i) => {
-                const isEven = i % 2 === 0;
-                return (
-                  <motion.div
-                    key={step.step}
-                    initial={{ opacity: 0, x: isEven ? -40 : 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="relative lg:py-8"
-                  >
-                    {/* Desktop layout - alternating sides */}
-                    <div className={`lg:grid lg:grid-cols-2 lg:gap-16 items-center ${isEven ? '' : 'lg:direction-rtl'}`}>
-                      {/* Content side */}
-                      <div className={`${isEven ? 'lg:text-right lg:pr-16' : 'lg:order-2 lg:pl-16'}`}>
-                        <div className={`flex items-center gap-4 mb-4 ${isEven ? 'lg:justify-end' : ''}`}>
-                          <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent text-accent-foreground text-sm font-bold">
-                            {step.step}
-                          </span>
-                          <h3 className="text-xl font-display font-semibold text-foreground">{step.title}</h3>
-                        </div>
-                        <p className="text-muted-foreground leading-relaxed max-w-md ml-16 lg:ml-0 lg:max-w-none">
-                          {step.description}
-                        </p>
-                      </div>
-
-                      {/* Image side */}
-                      <div className={`mt-6 lg:mt-0 ${isEven ? 'lg:order-2 lg:pl-16' : 'lg:pr-16'}`}>
-                        <div className="relative rounded-xl overflow-hidden shadow-lg aspect-[16/10] ml-16 lg:ml-0">
-                          <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Center dot on timeline - desktop */}
-                    <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-                      <div className="w-5 h-5 rounded-full bg-accent border-4 border-secondary shadow-md" />
-                    </div>
-
-                    {/* Mobile vertical line connector */}
-                    {i < processSteps.length - 1 && (
-                      <div className="lg:hidden absolute left-[1.45rem] top-[3.5rem] bottom-[-4rem] w-px bg-border" />
-                    )}
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            {/* Journey end marker */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="hidden lg:flex justify-center mt-8"
-            >
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-                  <CheckCircle size={20} className="text-accent-foreground" />
-                </div>
-                <span className="text-sm font-semibold text-accent">Your Dream Home</span>
-              </div>
-            </motion.div>
-          </div>
         </div>
+
+        <HorizontalScrollProcess steps={processSteps} />
       </section>
 
       {/* Lifetime Support */}
