@@ -17,8 +17,7 @@ const CTASection = () => {
         >
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">Ready to Start Your Project?</h2>
           <p className="text-primary-foreground/60 text-lg mb-10 leading-relaxed">
-            Looking for the best construction company in Bangalore? We're here to bring
-            your construction vision to life. Get a free consultation and quote today.
+            Looking for the best construction company in Bangalore? As top residential builders, we're here to bring your construction vision to life. Get a free consultation and quote today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

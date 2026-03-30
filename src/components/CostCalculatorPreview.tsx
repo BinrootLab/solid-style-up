@@ -20,8 +20,7 @@ const CostCalculatorPreview = () => {
               Estimate Your Project Cost
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              Get an instant estimate for your construction project. Our transparent pricing calculator
-              helps you plan your budget with confidence based on current market rates in Bangalore.
+              Get an instant estimate for your construction project. Our transparent pricing calculator helps you plan your budget with confidence.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
@@ -30,8 +29,8 @@ const CostCalculatorPreview = () => {
                   <IndianRupee size={18} />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-foreground">Transparent</p>
-                  <p className="text-xs text-muted-foreground">No hidden costs</p>
+                  <p className="text-sm font-semibold text-foreground">Transparent Pricing</p>
+                  <p className="text-xs text-muted-foreground">No hidden costs, complete transparency in pricing</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -39,8 +38,8 @@ const CostCalculatorPreview = () => {
                   <Clock size={18} />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-foreground">Instant</p>
-                  <p className="text-xs text-muted-foreground">Results in seconds</p>
+                  <p className="text-sm font-semibold text-foreground">Instant Results</p>
+                  <p className="text-xs text-muted-foreground">Get your estimate in seconds</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -48,8 +47,8 @@ const CostCalculatorPreview = () => {
                   <Calculator size={18} />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-foreground">Accurate</p>
-                  <p className="text-xs text-muted-foreground">Market rates</p>
+                  <p className="text-sm font-semibold text-foreground">Accurate Estimates</p>
+                  <p className="text-xs text-muted-foreground">Based on current market rates in Bangalore</p>
                 </div>
               </div>
             </div>
