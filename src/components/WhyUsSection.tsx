@@ -1,47 +1,50 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Cpu, BadgeCheck, Eye, Users, Clock } from "lucide-react";
+import { Shield, Cpu, CheckCircle, Eye, Users, Clock } from "lucide-react";
 
-const features = [
-  { icon: ShieldCheck, title: "Safety First", desc: "We prioritize safety on every project, every day." },
-  { icon: Cpu, title: "Advanced Technology", desc: "Fully integrated technology for better project outcomes." },
-  { icon: BadgeCheck, title: "Quality Assurance", desc: "Rigorous quality checks at every stage of construction." },
-  { icon: Eye, title: "Transparent Tracking", desc: "Real-time updates and complete transparency throughout." },
-  { icon: Users, title: "Expert Team", desc: "Skilled professionals with years of exceptional experience." },
-  { icon: Clock, title: "Timely Delivery", desc: "On schedule without compromising quality." },
+const differentiators = [
+  { icon: Shield, title: "Safety First", description: "Prioritizing safety on every project, every day." },
+  { icon: Cpu, title: "Advanced Technology", description: "Technology-driven monitoring for better outcomes." },
+  { icon: CheckCircle, title: "Quality Assurance", description: "450+ rigorous quality checks at every stage." },
+  { icon: Eye, title: "Transparent Tracking", description: "Real-time project updates and complete visibility." },
+  { icon: Users, title: "Expert Team", description: "Skilled professionals with decades of experience." },
+  { icon: Clock, title: "Timely Delivery", description: "On-schedule completion without compromising quality." },
 ];
 
 const WhyUsSection = () => {
   return (
-    <section className="py-24 md:py-32 bg-background">
+    <section className="py-24 bg-primary text-primary-foreground">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center max-w-2xl mx-auto mb-14"
         >
-          <p className="text-primary text-sm tracking-[0.3em] uppercase font-semibold mb-4">Why BHUVi</p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
-            Excellence in Every Detail
-          </h2>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="h-px w-8 bg-accent" />
+            <span className="text-accent text-sm font-semibold tracking-widest uppercase">Why Choose Us</span>
+            <div className="h-px w-8 bg-accent" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Excellence in Every Detail</h2>
+          <p className="text-primary-foreground/60">What sets us apart in the construction industry</p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((f, i) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {differentiators.map((item, i) => (
             <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 30 }}
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="flex gap-5"
+              transition={{ delay: i * 0.08 }}
+              className="flex gap-4"
             >
-              <div className="flex-shrink-0 w-14 h-14 rounded-sm bg-primary/10 flex items-center justify-center">
-                <f.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+              <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-accent/15 text-accent">
+                <item.icon size={22} />
               </div>
               <div>
-                <h3 className="text-lg font-display font-bold text-foreground mb-2">{f.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+                <h3 className="text-lg font-display font-semibold mb-1">{item.title}</h3>
+                <p className="text-sm text-primary-foreground/60 leading-relaxed">{item.description}</p>
               </div>
             </motion.div>
           ))}

@@ -1,39 +1,39 @@
 import { motion } from "framer-motion";
-import { Phone, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Phone } from "lucide-react";
 
 const CTASection = () => {
   return (
-    <section className="py-24 md:py-32 bg-primary relative overflow-hidden">
-      {/* Decorative */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gold/10 rounded-full blur-3xl" />
-
-      <div className="container relative z-10 text-center">
+    <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
+      <div className="absolute inset-0 opacity-10">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=60" alt="" className="w-full h-full object-cover" />
+      </div>
+      <div className="container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="text-center max-w-2xl mx-auto"
         >
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight mb-6">
-            Ready to Start <br className="hidden md:block" />Your Project?
-          </h2>
-          <p className="text-primary-foreground/70 max-w-xl mx-auto mb-12 text-lg">
-            Looking for the best construction company in Bangalore? We're here to bring your vision to life. Get a free consultation today.
+          <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">Ready to Start Your Project?</h2>
+          <p className="text-primary-foreground/60 text-lg mb-10 leading-relaxed">
+            Looking for the best construction company in Bangalore? We're here to bring
+            your construction vision to life. Get a free consultation and quote today.
           </p>
-
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-primary-foreground text-primary font-semibold text-sm tracking-wide uppercase rounded-sm hover:bg-gold hover:text-gold-foreground transition-all duration-300"
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-accent-foreground font-semibold text-sm rounded-md hover:bg-accent/90 transition-colors"
             >
-              <Phone size={18} />
-              Get Free Consultation
-            </a>
+              Get Free Consultation <ArrowRight size={16} />
+            </Link>
             <a
-              href="https://wa.me/"
-              className="inline-flex items-center justify-center gap-3 px-10 py-4 border border-primary-foreground/30 text-primary-foreground font-semibold text-sm tracking-wide uppercase rounded-sm hover:bg-primary-foreground/10 transition-all duration-300"
+              href="https://wa.me/919741155118"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-primary-foreground/20 text-primary-foreground font-semibold text-sm rounded-md hover:bg-primary-foreground/10 transition-colors"
             >
-              <MessageCircle size={18} />
+              <Phone size={16} />
               WhatsApp Us
             </a>
           </div>

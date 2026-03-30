@@ -2,48 +2,67 @@ import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
 const testimonials = [
-  { text: "Very good team.", author: "Santosh", role: "Owner - Shanti Nivas" },
-  { text: "Bhuvi Life Spaces handled our villa project very professionally. Regular updates, proper supervision, and timely completion made the entire process stress-free.", author: "Narayan", role: "Owner - Neralu Villas" },
-  { text: "Good experience overall. The team is knowledgeable and ensures quality at every stage. Our commercial space was delivered as per the agreed timeline.", author: "Manoj S", role: "Owner" },
-  { text: "Excellent construction quality and attention to detail. The project management was smooth and the team was always available for queries.", author: "Arun D", role: "Owner" },
+  {
+    quote: "Bhuvi Life Spaces handled our villa project very professionally. Regular updates, proper supervision, and timely completion made the entire process stress-free.",
+    name: "Narayan",
+    role: "Owner - Neralu Villas",
+  },
+  {
+    quote: "Good experience overall. The team is knowledgeable and ensures quality at every stage. Our commercial space was delivered as per the agreed timeline.",
+    name: "Manoj S",
+    role: "Commercial Project Owner",
+  },
+  {
+    quote: "Excellent construction quality and attention to detail. The project management was smooth and the team was always available for queries.",
+    name: "Arun D",
+    role: "Residential Project Owner",
+  },
+  {
+    quote: "Very good team. Professional approach and they keep their promises on timelines and quality.",
+    name: "Santosh",
+    role: "Owner - Shanti Nivas",
+  },
 ];
 
 const TestimonialsSection = () => {
   return (
-    <section className="py-24 md:py-32" style={{ background: "var(--section-gradient)" }}>
+    <section className="py-24 bg-secondary">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center max-w-2xl mx-auto mb-14"
         >
-          <p className="text-primary text-sm tracking-[0.3em] uppercase font-semibold mb-4">Testimonials</p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
-            Trusted by Hundreds of Clients
-          </h2>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="h-px w-8 bg-accent" />
+            <span className="text-accent text-sm font-semibold tracking-widest uppercase">Testimonials</span>
+            <div className="h-px w-8 bg-accent" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">Trusted by Hundreds of Clients</h2>
+          <p className="text-muted-foreground">Real feedback from real clients who trusted us with their construction projects</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {testimonials.map((t, i) => (
             <motion.div
-              key={t.author}
-              initial={{ opacity: 0, y: 30 }}
+              key={t.name}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-background p-8 rounded-sm border border-border"
+              className="bg-background rounded-lg p-8 border border-border"
             >
-              <Quote className="w-8 h-8 text-primary/30 mb-4" />
+              <Quote size={24} className="text-accent/30 mb-4" />
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, j) => (
-                  <Star key={j} className="w-4 h-4 fill-gold text-gold" />
+                  <Star key={j} size={14} className="fill-accent text-accent" />
                 ))}
               </div>
-              <p className="text-foreground/80 leading-relaxed mb-6 italic">"{t.text}"</p>
+              <p className="text-foreground/80 leading-relaxed mb-6 italic">"{t.quote}"</p>
               <div>
-                <p className="font-display font-bold text-foreground">{t.author}</p>
-                <p className="text-xs text-muted-foreground">{t.role}</p>
+                <p className="font-semibold text-foreground">{t.name}</p>
+                <p className="text-sm text-muted-foreground">{t.role}</p>
               </div>
             </motion.div>
           ))}
