@@ -71,8 +71,13 @@ const Footer = () => {
 
       <div className="border-t border-primary-foreground/10">
         <div className="container py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-primary-foreground/40">© {new Date().getFullYear()} BHUVi Lifespaces. All rights reserved.</p>
-          <p className="text-xs text-primary-foreground/40">Monday - Saturday: 9:30 AM - 5:30 PM | Sunday: Appointment Based</p>
+          <p className="text-xs text-primary-foreground/40">© {new Date().getFullYear()} Bhuvi Life Spaces. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-6">
+            <Link to="/faqs" className="text-xs text-primary-foreground/40 hover:text-primary-foreground transition-colors">FAQs</Link>
+            <Link to="/terms-and-conditions" className="text-xs text-primary-foreground/40 hover:text-primary-foreground transition-colors">Terms and Conditions</Link>
+            <Link to="/privacy-policy" className="text-xs text-primary-foreground/40 hover:text-primary-foreground transition-colors">Privacy Policy</Link>
+            <Link to="/return-refund-policy" className="text-xs text-primary-foreground/40 hover:text-primary-foreground transition-colors">Return & Refund Policy</Link>
+          </div>
         </div>
       </div>
     </footer>
