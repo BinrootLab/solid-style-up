@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Home, Building2, Building, Key, ClipboardList, Hammer, ArrowRight, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
