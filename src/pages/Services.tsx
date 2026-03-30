@@ -215,7 +215,7 @@ const HorizontalScrollProcess = ({ steps }: { steps: typeof processSteps }) => {
   );
 };
 
-
+const ServicesPage = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
