@@ -3,6 +3,11 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
+    quote: "Very good team.",
+    name: "Santosh",
+    role: "Owner - Shanti Nivas",
+  },
+  {
     quote: "Bhuvi Life Spaces handled our villa project very professionally. Regular updates, proper supervision, and timely completion made the entire process stress-free.",
     name: "Narayan",
     role: "Owner - Neralu Villas",
@@ -10,17 +15,12 @@ const testimonials = [
   {
     quote: "Good experience overall. The team is knowledgeable and ensures quality at every stage. Our commercial space was delivered as per the agreed timeline.",
     name: "Manoj S",
-    role: "Commercial Project Owner",
+    role: "Owner",
   },
   {
     quote: "Excellent construction quality and attention to detail. The project management was smooth and the team was always available for queries.",
     name: "Arun D",
-    role: "Residential Project Owner",
-  },
-  {
-    quote: "Very good team. Professional approach and they keep their promises on timelines and quality.",
-    name: "Santosh",
-    role: "Owner - Shanti Nivas",
+    role: "Owner",
   },
 ];
 
