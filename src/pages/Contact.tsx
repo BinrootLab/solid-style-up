@@ -171,7 +171,7 @@ const ContactPage = () => {
               </div>
               <h2 className="text-3xl font-display font-bold text-foreground mb-4">Contact Information</h2>
               <p className="text-muted-foreground text-sm leading-relaxed mb-8">
-                We're here to help! Reach out to us through any of the following channels.
+                We're here to help! Reach out to us through any of the following channels. Our team is ready to assist you with your construction needs.
               </p>
 
               <div className="space-y-6">

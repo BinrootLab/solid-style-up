@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Shield, Cpu, CheckCircle, Eye, Users, Clock } from "lucide-react";
 
 const differentiators = [
-  { icon: Shield, title: "Safety First", description: "Prioritizing safety on every project, every day." },
-  { icon: Cpu, title: "Advanced Technology", description: "Technology-driven monitoring for better outcomes." },
-  { icon: CheckCircle, title: "Quality Assurance", description: "450+ rigorous quality checks at every stage." },
-  { icon: Eye, title: "Transparent Tracking", description: "Real-time project updates and complete visibility." },
-  { icon: Users, title: "Expert Team", description: "Skilled professionals with decades of experience." },
-  { icon: Clock, title: "Timely Delivery", description: "On-schedule completion without compromising quality." },
+  { icon: Shield, title: "Safety First", description: "The most important thing we do every day is prioritize safety on every project." },
+  { icon: Cpu, title: "Advanced Technology", description: "Fully integrated technology and innovation for better project outcomes." },
+  { icon: CheckCircle, title: "Quality Assurance", description: "Rigorous quality checks and standards at every stage of construction." },
+  { icon: Eye, title: "Transparent Tracking", description: "Real-time project updates and complete transparency throughout the journey." },
+  { icon: Users, title: "Expert Team", description: "Skilled professionals with years of experience delivering exceptional results." },
+  { icon: Clock, title: "Timely Delivery", description: "Commitment to completing projects on schedule without compromising quality." },
 ];
 
 const WhyUsSection = () => {
