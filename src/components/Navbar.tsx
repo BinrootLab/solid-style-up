@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -32,11 +33,14 @@ const Navbar = () => {
       }`}
     >
       <div className="container flex items-center justify-between h-20">
-        <Link to="/" className="flex items-center gap-1">
-          <span className="text-2xl font-display font-bold tracking-tight">
-            <span className={scrolled ? "text-foreground" : "text-primary-foreground"}>BHUV</span>
-            <span className="text-accent">i</span>
-          </span>
+        <Link to="/" className="flex items-center">
+          <img
+            src={logo}
+            alt="BHUVi Lifespaces"
+            className={`h-10 w-auto transition-all duration-300 ${
+              scrolled ? "" : "brightness-0 invert"
+            }`}
+          />
         </Link>
 
         {/* Desktop */}
@@ -47,7 +51,7 @@ const Navbar = () => {
               to={link.href}
               className={`px-4 py-2 text-sm font-medium transition-colors rounded-md ${
                 location.pathname === link.href
-                  ? "text-accent"
+                  ? scrolled ? "text-primary" : "text-primary-foreground"
                   : scrolled
                   ? "text-foreground/70 hover:text-foreground"
                   : "text-primary-foreground/80 hover:text-primary-foreground"
@@ -58,7 +62,11 @@ const Navbar = () => {
           ))}
           <Link
             to="/contact"
-            className="ml-4 px-6 py-2.5 text-sm font-semibold bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors"
+            className={`ml-4 px-6 py-2.5 text-sm font-semibold rounded-md transition-colors ${
+              scrolled
+                ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                : "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+            }`}
           >
             Get a Quote
           </Link>
@@ -89,7 +97,7 @@ const Navbar = () => {
                   to={link.href}
                   className={`py-3 px-4 rounded-md text-sm font-medium transition-colors ${
                     location.pathname === link.href
-                      ? "text-accent bg-secondary"
+                      ? "text-primary bg-secondary"
                       : "text-foreground/70 hover:text-foreground hover:bg-secondary"
                   }`}
                   onClick={() => setOpen(false)}
@@ -99,7 +107,7 @@ const Navbar = () => {
               ))}
               <Link
                 to="/contact"
-                className="mt-4 px-6 py-3 text-center text-sm font-semibold bg-accent text-accent-foreground rounded-md"
+                className="mt-4 px-6 py-3 text-center text-sm font-semibold bg-primary text-primary-foreground rounded-md"
                 onClick={() => setOpen(false)}
               >
                 Get a Quote
