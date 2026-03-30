@@ -68,7 +68,7 @@ const Navbar = () => {
                 : "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
             }`}
           >
-            Get a Quote
+            Client Login
           </Link>
         </div>
 
