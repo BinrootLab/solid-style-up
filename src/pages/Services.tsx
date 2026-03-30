@@ -249,29 +249,30 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Process - Horizontal Scroll Journey */}
-      <section className="py-24 bg-foreground text-primary-foreground overflow-hidden">
-        <div className="container mb-16">
+      {/* Process - Interactive Journey */}
+      <section className="py-24 bg-secondary">
+        <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-2xl"
+            className="text-center max-w-2xl mx-auto mb-16"
           >
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-px w-8 bg-accent" />
               <span className="text-accent text-sm font-semibold tracking-widest uppercase">Our Process</span>
+              <div className="h-px w-8 bg-accent" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
               Your Construction Journey
             </h2>
-            <p className="text-primary-foreground/50">
+            <p className="text-muted-foreground">
               From the first conversation to handing over the keys — here's how we bring your vision to life.
             </p>
           </motion.div>
-        </div>
 
-        <HorizontalScrollProcess steps={processSteps} />
+          <ProcessJourney steps={processSteps} />
+        </div>
       </section>
 
       {/* Lifetime Support */}
